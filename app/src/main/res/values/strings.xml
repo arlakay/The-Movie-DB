@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TheMovieDB</string>
+    <string-array name="sort">
+        <item>Popular</item>
+        <item>Top Rated</item>
+    </string-array>
+</resources>
