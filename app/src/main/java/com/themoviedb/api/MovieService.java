@@ -1,6 +1,7 @@
 package com.themoviedb.api;
 
 import com.themoviedb.model.MoviesResponse;
+import com.themoviedb.model.TrailersResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,8 +16,9 @@ public interface MovieService {
                                      @Query("api_key") String apiKey);
 
     //Trailers
-//    @GET("movie/{id}/videos")
-//    Call<TrailersResponse> trailerMovie(@Path("id") long id, @Query("api_key") String apiKey);
+    @GET("movie/{id}/videos")
+    Call<TrailersResponse> trailerMovie(@Path("id") long id, @Query("api_key") String apiKey);
+
     //Reviews
 //    @GET("movie/{id}/reviews")
 //    Call<ReviewsResponse> reviewsMovie(@Path("id") long id, @Query("api_key") String apiKey);

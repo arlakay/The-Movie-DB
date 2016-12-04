@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -14,21 +14,25 @@
 
         <ImageView
             android:id="@+id/poster"
-            android:layout_width="185dp"
-            android:layout_height="277dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:contentDescription="@null"
+            android:scaleType="fitXY"
             tools:background="@android:color/holo_red_dark" />
 
         <TextView
             android:id="@+id/release_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:fontFamily="sans-serif-condensed"
             android:textSize="22sp"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             tools:ignore="UnusedAttribute"
-            tools:text="LOREM IPSUM" />
-    </LinearLayout>
+            tools:text="LOREM IPSUM"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>
