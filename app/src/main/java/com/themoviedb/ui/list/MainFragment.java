@@ -3,6 +3,7 @@ package com.themoviedb.ui.list;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.themoviedb.R;
@@ -23,6 +23,7 @@ import com.themoviedb.api.RestApi;
 import com.themoviedb.api.ServiceConfig;
 import com.themoviedb.model.Movie;
 import com.themoviedb.model.MoviesResponse;
+import com.themoviedb.ui.detail.DetailActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,8 +83,7 @@ public class MainFragment extends Fragment implements SortableFragment {
             @Override
             public void onItemClickListener(long id,
                                             Movie movie) {
-                Toast.makeText(getActivity(), "wow", Toast.LENGTH_SHORT).show();
-//                openMovieDetail(id, movie);
+                openMovieDetail(id, movie);
             }
         });
 
@@ -99,14 +99,14 @@ public class MainFragment extends Fragment implements SortableFragment {
 
     }
 
-//    private void openMovieDetail(long id, Movie movie) {
-//        String movieJson = new Gson().toJson(movie);
-//
-//        Intent intent = new Intent(getActivity(), DetailActivity.class);
-//        intent.putExtra("movie_id", id);
-//        intent.putExtra("movie_data", movieJson);
-//        getActivity().startActivity(intent);
-//    }
+    private void openMovieDetail(long id, Movie movie) {
+        String movieJson = new Gson().toJson(movie);
+
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("movie_id", id);
+        intent.putExtra("movie_data", movieJson);
+        getActivity().startActivity(intent);
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -115,7 +115,6 @@ public class MainFragment extends Fragment implements SortableFragment {
     }
 
     private void getListMovie(String sort) {
-//        final ProgressDialog dialog = ProgressDialog.show(this, "", "loading...");
         loadingView.setVisibility(View.VISIBLE);
 
         MovieService apiService =
@@ -125,7 +124,6 @@ public class MainFragment extends Fragment implements SortableFragment {
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse>call, Response<MoviesResponse> response) {
-//                dialog.dismiss();
                 loadingView.setVisibility(View.GONE);
 
                 Log.e(TAG, "Status Code = " + response.code());
@@ -149,15 +147,11 @@ public class MainFragment extends Fragment implements SortableFragment {
 
             @Override
             public void onFailure(Call<MoviesResponse>call, Throwable t) {
-//                dialog.dismiss();
                 loadingView.setVisibility(View.GONE);
-
-//                Log.e(TAG, t.toString());
 
                 AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                 alertDialog.setTitle("Error");
                 alertDialog.setMessage("Kesalahan Jaringan");
-                //alertDialog.setIcon(R.drawable.tick);
                 alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
